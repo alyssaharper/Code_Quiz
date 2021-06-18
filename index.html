@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <title>Code Quiz</title>
+</head>
+<body>
+    <h1 id="header">Coding Quiz Challange</h1>
+    <div id="intro">Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by 10 seconds.</div>
+    <button id="start_quiz">Start Quiz</button>
+    <div class="question_block"></div>
+        <ul id="questions">
+            <li id="optionA"><button id="optA"></button></li>
+            <li id="optionB"><button id="optB"></button></li>
+            <li id="optionC"><button id="optC"></button></li>
+            <li id="optionD"><button id="optD"></button></li>
+        </ul>
+    <div id="answerPrompt"></div>
+
+    <h1 id="allDone">All done!</h1>
+    <div id="finalScore"></div>
+    <form id="initials">
+        <input type="text" name="initial_input" id="initial_input" placeholder="Enter initials here"/>
+        <button id="submit">Submit</button>
+    </form>
+    <div id="timer"></div>
+    <div id="highScore"></div>
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript" src="./script.js"></script>
+</body>
+</html>
