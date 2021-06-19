@@ -1,10 +1,20 @@
-var start = document.getElementById("header");
-var quiz = document.getElementById("intro");
-var question = document.getElementById("questions");
-var optA = document.getElementById("optionA");
-var optB = document.getElementById("optionB");
-var optC = document.getElementById("optionC");
-var optD = document.getElementById("optionD");
+var startEl = $("#header");
+var quizEl = $("#intro");
+var startButtonEl = $("#startQuiz");
+var questionEl = $("#questions");
+var optAEl = document.getElementById("optionA");
+var optBEl = document.getElementById("optionB");
+var optCEl = document.getElementById("optionC");
+var optDEl = document.getElementById("optionD");
+var allDoneEl = $("#allDone")
+var initialInputEl = $("#initial_input");
+var submitEl = $("#submit");
+
+allDoneEl.hide();
+initialInputEl.hide();
+submitEl.hide();
+questionEl.hide();
+
 
 var questions = [
     {
@@ -48,6 +58,31 @@ var questions = [
     correct: "optionD"
     },
 ]
+
+startButtonEl.on('click', function() {
+    renderQuestion();
+    startEl.hide();
+    quizEl.hide();
+    startButtonEl.hide();
+});
+
+
+
+
+
 var score = 0;
 var lastQuestion = questions.length - 1;
-let startingQuestion = 0;
+let currentQuestion = 0;
+
+function renderQuestion(){
+    let q = questions[currentQuestion];
+    question.innerHTML = q.question;
+    optAEl.innerHTML = q.optA;
+    optBEl.innerHTML = q.optB;
+    optCEl.innerHTML = q.optC;
+    optDEl.innerHTML = q.optD;
+}
+
+// renderQuestion();
+// currentQuestion++;
+// renderQuestion();
