@@ -9,3 +9,7 @@ h1 {
 .startButton {
     text-align: center;
 }
+
+.hide {
+    display: none;
+}

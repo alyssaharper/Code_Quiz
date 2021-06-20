@@ -8,16 +8,20 @@
     <title>Code Quiz</title>
 </head>
 <body>
+    <main>
+        <div id="introBlock">
     <h1 id="header">Coding Quiz Challange</h1>
     <div id="intro">Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by 10 seconds.</div>
-    <button class="startButton" id="startQuiz">Start Quiz</button>
-    <div class="question_block"></div>
-        <ul id="questions">
-            <li id="optionA"></li>
-            <li id="optionB"></li>
-            <li id="optionC"></li>
-            <li id="optionD"></li>
-        </ul>
+    <button type="button" class="startButton" id="startQuiz">Start Quiz</button>
+</div>
+    <div id="question_block" class="hide">
+        <div id="questions">
+            <button class="optionText" id="optionA">test</button>
+            <button class="optionText" id="optionB">test</button>
+            <button class="optionText" id="optionC">test</button>
+            <button class="optionText" id="optionD">test</button>
+        </div>
+    </div>
     <div id="answerPrompt"></div>
 
     <h1 id="allDone">All done!</h1>
@@ -28,7 +32,7 @@
     </form>
     <div id="timer"></div>
     <div id="highScore"></div>
-
+</main>
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script type="text/javascript" src="./script.js"></script>
