@@ -1,15 +1,19 @@
-h1 {
-    text-align: center;
-}
 
-#intro {
-    text-align: center;
-}
 
-.startButton {
+#introBlock {
     text-align: center;
 }
 
 .hide {
     display: none;
+}
+
+#questionBlock {
+    text-align: left;
+}
+
+button {
+    text-align: center;
+    margin: 5px;
+    display: block;
 }

@@ -81,7 +81,7 @@ function getQuestions() {
     for (var buttonLoop = 0; buttonLoop < questions[currentQuestion].answers.length; buttonLoop++) {
         var buttonCode = "<button onclick=\"[ANS]\">[CHOICE]</button>"; 
         buttonCode = buttonCode.replace("[CHOICE]", questions[currentQuestion].answers[buttonLoop]);
-        if (questions[currentQuestion].answers[buttonLoop] == questions[currentQuestion].answer) {
+        if (questions[currentQuestion].answers[buttonLoop] == questions[currentQuestion].correct) {
             buttonCode = buttonCode.replace("[ANS]", "correct()");
         } else {
             buttonCode = buttonCode.replace("[ANS]", "wrong()");
