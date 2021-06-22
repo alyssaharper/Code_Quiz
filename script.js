@@ -64,7 +64,7 @@ timer = setInterval(function() {
 getQuestions();
 // console.log("test");
 };
-
+// hides timer, introblock and questionblock. Timeleft is converted into score. Set score to local storage.
 function gameOver() {
     clearInterval(timer);
     hideTimerEl.hide();
@@ -75,7 +75,7 @@ function gameOver() {
     finalScoreEl.text("Your final score was " + score);
     localStorage.setItem("highscore", score)
 }
-// runs resetBlock function and runs showQues function with argument shuffle questions at the current index
+// hides intro block. Cycles through the questions. Once questions runs out, runs gameOver function. Created a loop that cycles through buttons and assigns appropriate wrong or correct function.
 function getQuestions() {
     introBlockEl.hide();
     currentQuestion++;
@@ -97,16 +97,16 @@ function getQuestions() {
     }  
  questionBlockEl.html(createQuestionBlock);
 };
-
+// if answer is wrong, subtract 10 seconds from timer and run get questions function
 function wrong() {
     timeLeft -= 10;
     getQuestions();
 };
-
+// if answer is right, moves to next question.
 function correct() {
     getQuestions();
 }
-
+// hides the end screen and stores initials to local storage and then runs function showHighScore
 submitEl.on("click", function(event){
     event.preventDefault();
     endScreenEL.hide();
@@ -118,7 +118,7 @@ submitEl.on("click", function(event){
     showHighscore();
 
 });
-
+// hides timer, and displays score and initials from local storage.
 function showHighscore() {
     highscoreScreenEl.show();
     hideTimerEl.hide();
