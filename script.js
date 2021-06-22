@@ -1,8 +1,15 @@
+var startButtonEl = document.getElementById("startQuiz");
+var timerEl = document.getElementById("timer");
+var finalScoreEl = $('#finalScore');
+var endScreenEL = $('#endScreen');
+var introBlockEl = $('#introBlock');
+var questionBlockEl = $("#questionBlock");
+var highscoreEl = $('#highscore');
 
-var score = 0;
+var score = timeLeft;
 var timer;
 var timeLeft = 0;
-var currentQuestion = 0;
+var currentQuestion = -1;
 
 var questions = [
     {
@@ -32,41 +39,56 @@ var questions = [
     },
 ];
 
+endScreenEL.hide();
 // when start button is clicked, startGame function runs
 startButtonEl.addEventListener('click', startGame);
 //hides my intro block, creates a timer of 100 seconds and decreases the time by one second
 function startGame() {
-introBlockEl.classList.add('hide');
-questionBlockEl.classList.remove('hide');
 timeLeft = 100;
-document.getElementById("timer").innerHTML = timeLeft;
+timerEl.innerHTML = timeLeft;
 
 timer = setInterval(function() {
     timeLeft--;
-    document.getElementById("timer").innerHTML = timeLeft;
+    timerEl.innerHTML = timeLeft;
     if (timeLeft <=0) {
     clearInterval(timer);
     gameOver();
     }
-}, 100);
+}, 1000);
 getQuestions();
+// console.log("test");
 };
 
 function gameOver() {
     clearInterval(timer);
-    questionBlockEl.classList.add('hide');
-    allDoneEl.show();
-    initialInputEl.show();
-    submitEl.show();
+    introBlockEl.hide();
+    questionBlockEl.hide();
+    highscoreEl.show();
+    endScreenEL.show();
+    finalScoreEl.text("Your final score was " + score);
 }
 // runs resetBlock function and runs showQues function with argument shuffle questions at the current index
 function getQuestions() {
+    introBlockEl.hide();
+    highscoreEl.hide();
     currentQuestion++;
     if(currentQuestion >= questions.length) {
-        endGame();
+        gameOver();
         return;
     }
-    questionEl.innerHTML = questions[currentQuestion];
+    var createQuestionBlock = questions[currentQuestion].question;
+
+    for (var buttonLoop = 0; buttonLoop < questions[currentQuestion].answers.length; buttonLoop++) {
+        var buttonCode = "<button onclick=\"[ANS]\">[CHOICE]</button>"; 
+        buttonCode = buttonCode.replace("[CHOICE]", questions[currentQuestion].answers[buttonLoop]);
+        if (questions[currentQuestion].answers[buttonLoop] == questions[currentQuestion].answer) {
+            buttonCode = buttonCode.replace("[ANS]", "correct()");
+        } else {
+            buttonCode = buttonCode.replace("[ANS]", "wrong()");
+        }
+        createQuestionBlock += buttonCode
+    }  
+ questionBlockEl.html(createQuestionBlock);
 };
 
 function wrong() {
@@ -75,6 +97,5 @@ function wrong() {
 };
 
 function correct() {
-    score +=20;
     getQuestions();
 }
