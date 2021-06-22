@@ -9,8 +9,9 @@
 </head>
 <body>
     <div id="navbar">
-        <a onclick="viewHighscore()" href="#" id="highscore" >View Highscore</a>
-        <div id="timer">Time:</div>
+        <div id="highscore"></div>
+        <div id="timer">Time: <span id=timingTest>0</span></div>
+        
     </div>
     <main>
         <div id="introBlock">
@@ -26,9 +27,15 @@
         <h2>All Done!</h2>
         <p>Enter initials:</p> 
         <input type="text" id="initials" placeholder="Enter Initials Here">
-    <button onclick="submit()">Submit</button>
+    <button id="submit" onclick="submit()">Submit</button>
     <br>
-    <div id="finalScore"></div>
+    <div id="finalScore">
+    </div>
+    </div>
+    <div id="highscoreScreen">
+        <h1>Final Score</h1>
+        <p>Initials: <span id="typedInitials"></span></p>
+        <p>Score: <span id="timerScore"></span></p>
     </div>
     
 </main>

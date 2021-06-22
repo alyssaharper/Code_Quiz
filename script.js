@@ -1,12 +1,15 @@
 var startButtonEl = document.getElementById("startQuiz");
-var timerEl = document.getElementById("timer");
+var timerEl = document.getElementById("timingTest");
 var finalScoreEl = $('#finalScore');
 var endScreenEL = $('#endScreen');
 var introBlockEl = $('#introBlock');
 var questionBlockEl = $("#questionBlock");
-var highscoreEl = $('#highscore');
+var highscoreEl = document.getElementById('highscore');
+var submitEl = $('#submit');
+var initialsEl = document.getElementById('initials');
+var highscoreScreenEl = $("#highscoreScreen");
+var hideTimerEl = $('#timer');
 
-var score = timeLeft;
 var timer;
 var timeLeft = 0;
 var currentQuestion = -1;
@@ -40,10 +43,13 @@ var questions = [
 ];
 
 endScreenEL.hide();
+highscoreScreenEl.hide();
+hideTimerEl.hide();
 // when start button is clicked, startGame function runs
 startButtonEl.addEventListener('click', startGame);
 //hides my intro block, creates a timer of 100 seconds and decreases the time by one second
 function startGame() {
+    hideTimerEl.show();
 timeLeft = 100;
 timerEl.innerHTML = timeLeft;
 
@@ -61,16 +67,17 @@ getQuestions();
 
 function gameOver() {
     clearInterval(timer);
+    hideTimerEl.hide();
     introBlockEl.hide();
     questionBlockEl.hide();
-    highscoreEl.show();
     endScreenEL.show();
+    var score = timeLeft;
     finalScoreEl.text("Your final score was " + score);
+    localStorage.setItem("highscore", score)
 }
 // runs resetBlock function and runs showQues function with argument shuffle questions at the current index
 function getQuestions() {
     introBlockEl.hide();
-    highscoreEl.hide();
     currentQuestion++;
     if(currentQuestion >= questions.length) {
         gameOver();
@@ -99,3 +106,26 @@ function wrong() {
 function correct() {
     getQuestions();
 }
+
+submitEl.on("click", function(event){
+    event.preventDefault();
+    endScreenEL.hide();
+    var finalScoreBox = {
+        initial: initialsEl.value,
+    };
+
+    localStorage.setItem("finalScoreBox", JSON.stringify(finalScoreBox));
+    showHighscore();
+
+});
+
+function showHighscore() {
+    highscoreScreenEl.show();
+    hideTimerEl.hide();
+    var displayScore = JSON.parse(localStorage.getItem("finalScoreBox"));
+    var displayHS = localStorage.getItem("highscore");
+    if (displayScore !== null && displayHS !== null) {
+        document.getElementById("typedInitials").innerHTML =displayScore.initial;
+        document.getElementById("timerScore").innerHTML = displayHS;
+    };
+};
