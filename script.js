@@ -64,17 +64,7 @@ timer = setInterval(function() {
 getQuestions();
 // console.log("test");
 };
-// hides timer, introblock and questionblock. Timeleft is converted into score. Set score to local storage.
-function gameOver() {
-    clearInterval(timer);
-    hideTimerEl.hide();
-    introBlockEl.hide();
-    questionBlockEl.hide();
-    endScreenEL.show();
-    var score = timeLeft;
-    finalScoreEl.text("Your final score was " + score);
-    localStorage.setItem("highscore", score)
-}
+
 // hides intro block. Cycles through the questions. Once questions runs out, runs gameOver function. Created a loop that cycles through buttons and assigns appropriate wrong or correct function.
 function getQuestions() {
     introBlockEl.hide();
@@ -85,15 +75,15 @@ function getQuestions() {
     }
     var createQuestionBlock = questions[currentQuestion].question;
 
-    for (var buttonLoop = 0; buttonLoop < questions[currentQuestion].answers.length; buttonLoop++) {
-        var buttonCode = "<button onclick=\"[ANS]\">[CHOICE]</button>"; 
-        buttonCode = buttonCode.replace("[CHOICE]", questions[currentQuestion].answers[buttonLoop]);
-        if (questions[currentQuestion].answers[buttonLoop] == questions[currentQuestion].correct) {
-            buttonCode = buttonCode.replace("[ANS]", "correct()");
+    for (var optionsLoop = 0; optionsLoop < questions[currentQuestion].answers.length; optionsLoop++) {
+        var buttonClick = "<button onclick=\"[ANS]\">[CHOICE]</button>"; 
+        buttonClick = buttonClick.replace("[CHOICE]", questions[currentQuestion].answers[optionsLoop]);
+        if (questions[currentQuestion].answers[optionsLoop] == questions[currentQuestion].correct) {
+            buttonClick = buttonClick.replace("[ANS]", "correct()");
         } else {
-            buttonCode = buttonCode.replace("[ANS]", "wrong()");
+            buttonClick = buttonClick.replace("[ANS]", "wrong()");
         }
-        createQuestionBlock += buttonCode
+        createQuestionBlock += buttonClick
     }  
  questionBlockEl.html(createQuestionBlock);
 };
@@ -105,6 +95,17 @@ function wrong() {
 // if answer is right, moves to next question.
 function correct() {
     getQuestions();
+}
+// hides timer, introblock and questionblock. Timeleft is converted into score. Set score to local storage.
+function gameOver() {
+    clearInterval(timer);
+    hideTimerEl.hide();
+    introBlockEl.hide();
+    questionBlockEl.hide();
+    endScreenEL.show();
+    var score = timeLeft;
+    finalScoreEl.text("Your final score was " + score);
+    localStorage.setItem("highscore", score)
 }
 // hides the end screen and stores initials to local storage and then runs function showHighScore
 submitEl.on("click", function(event){
